@@ -21,8 +21,9 @@ function App() {
   const handleRemove = async (index, id) => {
     try {
       await axios.delete(`http://localhost:4001/products/${id}`);
-      let newArray = [...info];
-      newArray.splice(index, 1);
+      let newArray = info.filter((item) => {
+        return item.id != id;
+      });
       setInfo(newArray);
     } catch {
       console.log("error", error);
@@ -55,6 +56,7 @@ function App() {
                 className="delete-button"
                 onClick={() => {
                   handleRemove(index, item.id);
+                  // getProduct();
                 }}
               >
                 x
